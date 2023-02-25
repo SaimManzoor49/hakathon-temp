@@ -1,4 +1,6 @@
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 import React, { useState } from 'react'
+import { auth } from '../../../config/firebase'
 
 
 
@@ -26,13 +28,31 @@ export default function Index() {
 
   const handleLogin =()=>{
 
+const {email,password} = state
     
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user)
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+
+
 
   }
 
 
   return (
     <>
+    <div>
+      <div className="text-center">Login</div>
+    </div>
       <div className="container">
         <div className="row mt-5">
           <div className="col">
